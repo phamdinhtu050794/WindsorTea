@@ -21,29 +21,26 @@ export default {
     name: String,
     details: String,
     price: Number,
-
   },
- 
-  
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 
 .card-container {
-  width: 450px;
-  height: 100px;
+//   width: 450px;  
+//   height: 100px;
    border:1px solid white;
    align-items: center;
    display: flex;
+   flex-shrink: 1; 
    flex-direction: row;
 //    justify-content: space-around;
    
    border-radius:50px 50px 50px 50px ;
 
     background-color: rgb(248, 211, 143);
-    margin-bottom: 300px;
+    margin-bottom: 30px;
     
 }
 .product{
