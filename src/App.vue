@@ -4,10 +4,15 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div> -->
+    <!-- HELLO <br>
+    <md-icon> thumb_up</md-icon>
+    <md-icon> close</md-icon>
+    <md-button> hello </md-button> -->
     <router-view/>
   </div>
 </template>
 
+<style src="vue-material/dist/vue-material.css"></style> 
 <style lang="scss">
 html {
   scroll-behavior: smooth; 

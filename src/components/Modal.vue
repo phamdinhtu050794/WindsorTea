@@ -22,8 +22,10 @@
 
       <!-- <div class="footer"> -->
         
-        <button class="button" @click="close">X</button>
-        
+        <!-- <button class="button" @click="close">X</button> -->
+        <!-- <button @click="close"> -->
+            <md-icon @click.native="close" id="button" class="md-size-3x fa fa-close"></md-icon>
+        <!-- </button> -->
       <!-- </div> -->
     
   </div>
@@ -49,6 +51,7 @@ export default {
       this.showModal = !this.showModal;
     },
     close() {
+      console.log("cccccclosing")
       // alert('gfhfhg')
       this.$emit("close");
     },
@@ -109,12 +112,13 @@ export default {
   // margin-left: 100px;
   // margin-right: 80px;
 }
-.button{
+#button{
   position: absolute;
   top: 0px;
   right: 40px;
   // left: 40px;
-  font-size: 40px;
+  width: 75px;
+  height: 75px;
   background-color:red;
 }
 .name{
