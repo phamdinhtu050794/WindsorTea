@@ -42,7 +42,7 @@
 
             <div class="body">
                 <div class="list-container">
-                    <div v-for="item in inventory" :key="item.key" class="list-item">
+                    <div v-for="item in getSection_0" :key="item.key" class="list-item">
                         <Card4
                             v-if="item.avaliable && showCard == 4"
                             @click.native="showModal"
@@ -85,6 +85,12 @@ export default {
         inventory() {
             console.log("getting inventory for Grid.vue");
             return store.state.Inventory;
+        },
+        getSection_0() { 
+            return store.state.Inventory.filter(   (item)=>{ 
+                console.log(item.section == 4); 
+                return item.section == 4;
+            });
         }
     },
     props: {
