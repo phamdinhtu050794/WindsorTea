@@ -9,8 +9,10 @@
     <br/>
     <Card2 name="Tea Pot" price="$9.99"/>
     <Card2 name="Tea Pot" price="$9.99"/> -->
-    <Grid> </Grid>     
     
+    
+    <!-- <Grid> </Grid>      -->
+    <Test> </Test> 
      <router-link to="/about">Inventory</router-link>
        
     <!-- <img alt="Vue logo" src="../assets/logo.png">
@@ -23,13 +25,15 @@
 import HelloWorld from '@/components/HelloWorld.vue'
 import Grid from '@/components/Grid.vue'
 import Card2 from '@/components/Card2.vue'
+import Test from '@/components/Test.vue'
 
 export default {
   name: 'Home',
   components: {
     HelloWorld,
     Grid,
-    Card2
+    Card2,
+    Test
   }
 }
 </script>
