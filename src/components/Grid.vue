@@ -32,6 +32,8 @@
                         <br />
                     </div>
                 </div>
+                <div v-show="menuOpen" class="menu-box-bottom">
+                </div>
             </transition>
 
             <div class="body">

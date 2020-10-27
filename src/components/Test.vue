@@ -13,9 +13,14 @@
 
         <!-- <transition name="menu-transition"> -->
         <div class="container">
-            <transition name="menu-box">
-                <!-- <div v-show="menuOpen" class="menu-box-bottom">
-                </div>  -->
+
+                
+            <transition name="menu-box-bottom">
+                <div v-show="menuOpen" class="menu-box-bottom">
+                   
+                </div>
+            </transition>
+            <transition name="menu-box"> 
                 <div v-show="menuOpen" class="menu-box">
                    
                         <h1>Menu</h1>
@@ -32,7 +37,6 @@
                         <br />
                         <a class="section" href="#goto1">Section 6</a>
                         <br />
-                   
                 </div>
             </transition>
 
@@ -116,7 +120,7 @@ export default {
     display: flex;
     flex-direction: row;
     width: 100%;
-    background-color: turquoise;
+    // background-color: turquoise;
     justify-content: center;
 }
 
@@ -137,8 +141,8 @@ export default {
     width: 20vw; 
     height: 90vh; 
     // will-change: width;
-    background-color: red;
-    z-index: -2; 
+    // background-color: green;
+    // z-index: -2; 
 }
 .menu-box {
     display: flex; 
@@ -146,31 +150,58 @@ export default {
     flex-direction: column; 
     justify-content: space-around;
     // width: 90vw;
-    width: 20vw; 
+    width: 17vw; 
     height: 90vh; 
     // will-change: width;
-    background-color: green;
-
+    background-color:whitesmoke;
+    border-radius:50px 50px 50px 50px;
     // margin-left: 0px; 
-    z-index: 20; 
+    // z-index: 1; 
 }
 .menu-box-enter,
 .menu-box-leave-to {
-    width: 0px;
+    // width: 0px;
+    transform: translate(-17vw,0px);
+    opacity: 0; 
+    position: fixed; 
     // margin-left: 0px; 
-    background-color: blue;
+    // background-color: blue;
 }
 
 .menu-box-enter-to,
 .menu-box-leave {
-    width: 20vw;
+    // width: 17vw;
+    transform: translate(0px);
     // margin-left: 200px; 
-    background-color: yellow;
+    opacity: 100; 
+    position: fixed; 
+    // background-color: yellow;
 }
 .menu-box-enter-active,
 .menu-box-leave-active {
-    transition: all 3s ease-out;
+    transition: all 1s ease-out;
 }
+
+.menu-box-bottom-enter,
+.menu-box-bottom-leave-to {
+    width: 0px;
+    opacity: 0; 
+    // margin-left: 0px; 
+    // background-color: blue;
+}
+
+.menu-box-bottom-enter-to,
+.menu-box-bottom-leave {
+    width: 20vw;
+    // margin-left: 200px; 
+    opacity: 100; 
+    // background-color: green;
+}
+.menu-box-bottom-enter-active,
+.menu-box-bottom-leave-active {
+    transition: all 1s ease-out;
+}
+
 
 
 
@@ -179,7 +210,7 @@ export default {
     // display: flex;
     display: flex;
     flex-direction: row;
-    background-color: whitesmoke;
+    // background-color: whitesmoke;
 
     //   height: 100vh;
     //   overflow: scroll;
@@ -190,7 +221,7 @@ export default {
     display: flex;
     flex-direction: row;
     // justify-content: space-between;
-    background-color: pink;
+    // background-color: pink;
     width: 100%; 
     min-width: 0px; 
 }
@@ -202,7 +233,7 @@ min-width: 0px;
     width: 100%;
     margin: 0px auto;
     overflow: visible;
-    background-color: grey;
+    // background-color: grey;
     padding: 30px;
     justify-content: space-between;
 }
@@ -212,7 +243,7 @@ min-width: 0px;
     min-width: 0px;
     flex: 0 10 30%;
     // margin: 5px;
-    background-color: purple;
+    // background-color: purple;
     justify-content: space-around;
     overflow: hidden;
 
