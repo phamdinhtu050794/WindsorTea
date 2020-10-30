@@ -23,6 +23,16 @@
     <input type="number" v-model="pickedIndex" /> -->
 
     <h1>Inventory</h1>
+   <div> 
+     <money-format :value="price"
+     :locale='en'
+     :currency-code='USD'
+     :subunits-value=true 
+     :hide-subunits=false>
+     </money-format>
+   </div>
+
+
     <div class="top-container">
       <div class="table-header">
         <div class="cell">Avaliable</div>
@@ -52,6 +62,7 @@
             </div>
             <!-- <label for="checkbox">{{ avaliable}}</label> -->
             <div class="cell">
+              
               <input
                 type="String"
                 v-model="item.name"
@@ -59,11 +70,17 @@
               />
             </div>
             <div class="cell">
-              <input
+              <!-- <money v-model="item.price" v-bind="moneyVND" v-on:input="updatePrice($event, item.index)"></money> -->
+              <!-- <input
                 type="number"
-                v-model="item.price"
+                v-model="item.price" 
                 v-on:input="updatePrice($event, item.index)"
-              />
+              /> -->
+              <!-- {{item.price.toFixed(2)}} -->
+
+
+
+              
             </div>
             <div class="cell scroll">
               <input
@@ -88,11 +105,16 @@
 
 <script>
 import store from "@/store/index.js";
+import MoneyFormat from 'vue-money-format'
+
 export default {
   name: "Inventory",
   //   mounted() {
   //       this.localInventory = store.state.Inventory;
   //   },
+  components: {
+    'money-format': MoneyFormat,
+  },
   computed: {
     // section: {
     //   get() {
@@ -132,6 +154,8 @@ export default {
       get() {
         console.log("updateing.........................................");
         return this.$store.state.Inventory.map((value, index) => {
+          // value.price = value.price.toFixed(2); 
+          // console.log(typeof(value.price))
           return { ...value, index: index };
         });
         //this.$forceUpdate();
@@ -147,8 +171,26 @@ export default {
     return {
       //   localInventory: null
       // pickedIndex: 10,
+      price: 234.56,
+      moneyVND:{
+          decimal: '.',
+          thousands: '.',
+          prefix: '',
+          suffix: ' VND',
+          precision: 2,
+          masked: false
+        },
+      moneyUSD:{
+          decimal: '.',
+          thousands: '.',
+          prefix: '$',
+          suffix: ' ',
+          precision: 2,
+          masked: false
+        }
     };
   },
+     
   methods: {
     updateAvailable(event, index) {
       console.log("setting Available... " + event.target.checked);
@@ -186,8 +228,9 @@ export default {
       });
     },
     updatePrice(event, index) {
+      console.log(event); 
       this.$store.commit("updatePrice", {
-        price: event.target.value,
+        price:  event.target.value,
         index: index,
       });
     },
