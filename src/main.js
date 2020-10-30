@@ -7,6 +7,9 @@ import store from './store'
 import VueMaterial from 'vue-material'
 // import 'vue-material/dist/vue-material.min.css'
 // import 'vue-material/dist/theme/default.css'
+import moment from 'moment'
+Vue.prototype.moment = moment
+
 
 Vue.use(VueMaterial)
 

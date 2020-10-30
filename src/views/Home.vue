@@ -11,8 +11,9 @@
     <Card2 name="Tea Pot" price="$9.99"/> -->
     
     
-    <!-- <Grid> </Grid>      -->
-    <Test> </Test> 
+    <Grid> </Grid>     
+    <!-- <Test> </Test>  -->
+    <!-- <CreateCRUD></CreateCRUD> -->
      <router-link to="/about">Inventory</router-link>
        
     <!-- <img alt="Vue logo" src="../assets/logo.png">
@@ -26,6 +27,7 @@ import HelloWorld from '@/components/HelloWorld.vue'
 import Grid from '@/components/Grid.vue'
 import Card2 from '@/components/Card2.vue'
 import Test from '@/components/Test.vue'
+import CreateCRUD from '@/components/CreateCRUD.vue'
 
 export default {
   name: 'Home',
@@ -33,7 +35,8 @@ export default {
     HelloWorld,
     Grid,
     Card2,
-    Test
+    Test,
+    CreateCRUD
   }
 }
 </script>
