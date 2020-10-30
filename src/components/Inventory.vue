@@ -1,5 +1,27 @@
 <template>
   <div class="inventory-container">
+    <!-- <input type="String" v-model="name" @input="updateName" />
+
+    <input type="number" :value="section" @input="updateSection">
+    <select @input="updateSection">
+      <option :selected="0 == section">0</option>
+      <option :selected="1 == section">1</option>
+      <option :selected="2 == section">2</option>
+      <option :selected="3 == section">3</option>
+      <option :selected="4 == section">4</option>
+      <option :selected="5 == section">5</option>
+    </select>
+
+    <input type="boolean" v-model="avaliable" @input="updateAvaliable" />
+    <input type="number" v-model="price" @input="updatePrice" />
+    <input type="String" v-model="description" @input="updateDescription" />
+    <input type="String" v-model="image" @input="updateImage" />
+
+    <br />
+    For what index?
+    <br />
+    <input type="number" v-model="pickedIndex" /> -->
+
     <h1>Inventory</h1>
     <div class="top-container">
       <div class="table-header">
@@ -11,11 +33,7 @@
       </div>
       <div class="table-body-container">
         <div class="table">
-          <div
-            v-for="(item, index) in inventory"
-            :key="item.key"
-            class="table-row"
-          >
+          <div v-for="item in inventory" :key="item.key" class="table-row">
             <!-- <div class="cell"> {{item.chekbox}}</div> -->
             <!-- <div class="cell">
               <input
@@ -24,11 +42,38 @@
                 v-model="inventory[index].avaliable"
               />
             </div> -->
-            <div class="cell"><input type="checkbox" id="checkbox" v-model="item.avaliable" v-on:input="updateAvailable($event, index)"></div>
+            <div class="cell">
+              <input
+                type="checkbox"
+                id="checkbox"
+                v-model="item.avaliable"
+                v-on:input="updateAvailable($event, item.index)"
+              />
+            </div>
             <!-- <label for="checkbox">{{ avaliable}}</label> -->
-            <div class="cell">{{ item.name }}</div>
-            <div class="cell">{{ item.price }}</div>
-            <div class="cell scroll">{{ item.description }}</div>
+            <div class="cell">
+              <input
+                type="String"
+                v-model="item.name"
+                v-on:input="updateName($event, item.index)"
+              />
+            </div>
+            <div class="cell">
+              <input
+                type="number"
+                v-model="item.price"
+                v-on:input="updatePrice($event, item.index)"
+              />
+            </div>
+            <div class="cell scroll">
+              <input
+                type="String"
+                v-model="item.description"
+                v-on:input="updateDescription($event, item.index)"
+              />
+            </div>
+
+            <!-- to do  -->
             <div class="cell">{{ item.image }}</div>
           </div>
         </div>
@@ -49,29 +94,70 @@ export default {
   //       this.localInventory = store.state.Inventory;
   //   },
   computed: {
+    // section: {
+    //   get() {
+    //     console.log(
+    //       "Value of section: " +
+    //         this.$store.state.Inventory[this.pickedIndex].section
+    //     );
+    //     return this.$store.state.Inventory[this.pickedIndex].section;
+    //   },
+    // },
+    // avaliable: {
+    //   get() {
+    //     return this.$store.state.Inventory[this.pickedIndex].avaliable;
+    //   },
+    // },
+    // name: {
+    //   get() {
+    //     return this.$store.state.Inventory[this.pickedIndex].name;
+    //   },
+    // },
+    // price: {
+    //   get() {
+    //     return this.$store.state.Inventory[this.pickedIndex].price;
+    //   },
+    // },
+    // description: {
+    //   get() {
+    //     return this.$store.state.Inventory[this.pickedIndex].description;
+    //   },
+    // },
+    // image: {
+    //   get() {
+    //     return this.$store.state.Inventory[this.pickedIndex].image;
+    //   },
+    // },
     inventory: {
       get() {
         console.log("updateing.........................................");
-        return this.$store.state.Inventory;
+        return this.$store.state.Inventory.map((value, index) => {
+          return { ...value, index: index };
+        });
         //this.$forceUpdate();
       },
-    //   set(value) {
-    //     console.log("setting..............");
-    //     // this.$store.commit("toggleAvaliable", value.avaliable);
-    //   },
+      //   set(value) {
+      //     console.log("setting..............");
+      //     // this.$store.commit("toggleAvaliable", value.avaliable);
+      //   },
     },
   },
 
   data() {
     return {
       //   localInventory: null
+      // pickedIndex: 10,
     };
   },
   methods: {
     updateAvailable(event, index) {
-      console.log("setting");
+      console.log("setting Available... " + event.target.checked);
 
-      this.$store.commit("toggleAvaliable", index);
+      // this.$store.commit("toggleAvaliable", index);
+      this.$store.commit("updateAvaliable", {
+        avaliable: event.target.checked,
+        index: index,
+      });
     },
     back() {
       //   this.$router.push('/');
@@ -80,6 +166,43 @@ export default {
     // shows() {
     //   this.$store.commit("shows", this.shows);
     // },
+
+    updateName(event, index) {
+      this.$store.commit("updateName", {
+        name: event.target.value,
+        index: index,
+      });
+    },
+    updateSection(event, index) {
+      this.$store.commit("updateSection", {
+        section: event.target.value,
+        index: index,
+      });
+    },
+    updateAvaliable(event, index) {
+      this.$store.commit("updateAvaliable", {
+        avaliable: event.target.value,
+        index: index,
+      });
+    },
+    updatePrice(event, index) {
+      this.$store.commit("updatePrice", {
+        price: event.target.value,
+        index: index,
+      });
+    },
+    updateDescription(event, index) {
+      this.$store.commit("updateDescription", {
+        description: event.target.value,
+        index: index,
+      });
+    },
+    updateImage(event, index) {
+      this.$store.commit("updateImage", {
+        image: event.target.value,
+        index: index,
+      });
+    },
   },
 };
 </script>

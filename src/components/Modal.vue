@@ -119,7 +119,7 @@ export default {
   // left: 40px;
   width: 75px;
   height: 75px;
-  background-color:red;
+  // background-color:red;
 }
 .name{
   font-size: 30px;

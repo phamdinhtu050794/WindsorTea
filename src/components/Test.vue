@@ -25,17 +25,17 @@
                    
                         <h1>Menu</h1>
                         <br />
-                        <a class="section" href="#goto1">Section 1</a>
+                        <a class="section" href="#goto0">Section 1</a>
                         <br />
                         <a class="section" href="#goto1">Section 2</a>
                         <br />
-                        <a class="section" href="#goto1">Section 3</a>
+                        <a class="section" href="#goto2">Section 3</a>
                         <br />
-                        <a class="section" href="#goto1">Section 4</a>
+                        <a class="section" href="#goto3">Section 4</a>
                         <br />
-                        <a class="section" href="#goto1">Section 5</a>
+                        <a class="section" href="#goto4">Section 5</a>
                         <br />
-                        <a class="section" href="#goto1">Section 6</a>
+                        <a class="section" href="#goto5">Section 6</a>
                         <br />
                 </div>
             </transition>
@@ -52,8 +52,90 @@
                         ></Card4>
                         
                     </div>
+                    <br>
+<br>
+<br>
+<br>
 
-                    <div id="goto1">text 1</div>
+                    <div id="goto0">text 0</div>
+                      <div v-for="item in getSection_1" :key="item.key" class="list-item">
+                        <Card4
+                            v-if="item.avaliable && showCard == 4"
+                            @click.native="showModal"
+                            :name="item.name"
+                            :price="item.price"
+                            :details="item.details"
+                        ></Card4>
+                        
+                    </div>
+<br>
+<br>
+<br>
+<br>                <div id="goto1">text 1</div>
+                      <div v-for="item in getSection_2" :key="item.key" class="list-item">
+                        <Card4
+                            v-if="item.avaliable && showCard == 4"
+                            @click.native="showModal"
+                            :name="item.name"
+                            :price="item.price"
+                            :details="item.details"
+                        ></Card4>
+                        
+                    </div>
+                    <br>
+<br>
+<br>
+<br>
+
+                    <div id="goto2">text 2</div>
+                      <div v-for="item in getSection_3" :key="item.key" class="list-item">
+                        <Card4
+                            v-if="item.avaliable && showCard == 4"
+                            @click.native="showModal"
+                            :name="item.name"
+                            :price="item.price"
+                            :details="item.details"
+                        ></Card4>
+                        
+                    </div>
+                    <br>
+<br>
+<br>
+<br>
+
+                    <div id="goto3">text 3</div>
+                      <div v-for="item in getSection_4" :key="item.key" class="list-item">
+                        <Card4
+                            v-if="item.avaliable && showCard == 4"
+                            @click.native="showModal"
+                            :name="item.name"
+                            :price="item.price"
+                            :details="item.details"
+                        ></Card4>
+                        
+                    </div>
+                    <br>
+<br>
+<br>
+<br>
+
+                    <div id="goto4">text 4</div>
+                      <div v-for="item in getSection_5" :key="item.key" class="list-item">
+                        <Card4
+                            v-if="item.avaliable && showCard == 4"
+                            @click.native="showModal"
+                            :name="item.name"
+                            :price="item.price"
+                            :details="item.details"
+                        ></Card4>
+                        
+                    </div>
+                    <br>
+<br>
+<br>
+<br>
+
+                    <div id="goto5">text 5</div>
                 </div>
             </div>
         </div>
@@ -88,10 +170,35 @@ export default {
         },
         getSection_0() { 
             return store.state.Inventory.filter(   (item)=>{ 
-                console.log(item.section == 4); 
+                return item.section == 0;
+            });
+        },
+         getSection_1() { 
+            return store.state.Inventory.filter(   (item)=>{ 
+                return item.section == 1;
+            });
+        },
+         getSection_2() { 
+            return store.state.Inventory.filter(   (item)=>{ 
+                return item.section == 2;
+            });
+        },
+         getSection_3() { 
+            return store.state.Inventory.filter(   (item)=>{ 
+                return item.section == 3;
+            });
+        },
+         getSection_4() { 
+            return store.state.Inventory.filter(   (item)=>{ 
                 return item.section == 4;
             });
-        }
+        },
+         getSection_5() { 
+            return store.state.Inventory.filter(   (item)=>{ 
+                return item.section == 5;
+            });
+        },
+
     },
     props: {
         msg: String

@@ -1,5 +1,6 @@
 <template>
     <div class="page-container">
+        
         <md-icon v-show="!menuOpen" @click.native="menuOpen = !menuOpen" class="md-size-2x fa fa-bars menu-button"></md-icon>
         <md-icon v-show="menuOpen" @click.native="menuOpen = !menuOpen" class="md-size-2x fa fa-close menu-button"></md-icon>
         <link
@@ -10,31 +11,34 @@
         <div class="title">
             <h1>The Windsor Tea House</h1>
         </div>
-
+        <SpecialDay class="day"></SpecialDay>
         <!-- <transition name="menu-transition"> -->
         <div class="container">
-            <transition name="menu-box">
-                <div v-show="menuOpen" class="menu-box">
-                    <div>
-                        <h1>Menu</h1>
-                        <br />
-                        <a class="section" href="#goto1">Section 1</a>
-                        <br />
-                        <a class="section" href="#goto1">Section 2</a>
-                        <br />
-                        <a class="section" href="#goto1">Section 3</a>
-                        <br />
-                        <a class="section" href="#goto1">Section 4</a>
-                        <br />
-                        <a class="section" href="#goto1">Section 5</a>
-                        <br />
-                        <a class="section" href="#goto1">Section 6</a>
-                        <br />
-                    </div>
-                </div>
+            <transition name="menu-box-bottom">
                 <div v-show="menuOpen" class="menu-box-bottom">
                 </div>
             </transition>
+            <transition name="menu-box">
+            <div v-show="menuOpen" class="menu-box">
+                    
+                        <h1>Menu</h1>
+                        <br />
+                        <a class="section" href="#goto0">Section 1</a>
+                        <br />
+                        <a class="section" href="#goto1">Section 2</a>
+                        <br />
+                        <a class="section" href="#goto2">Section 3</a>
+                        <br />
+                        <a class="section" href="#goto3">Section 4</a>
+                        <br />
+                        <a class="section" href="#goto4">Section 5</a>
+                        <br />
+                        <a class="section" href="#goto5">Section 6</a>
+                        <br />
+                    </div>
+                    </transition>
+                
+                
 
             <div class="body">
                 <div class="list-container">
@@ -47,10 +51,93 @@
                             :details="item.details"
                         ></Card4>
                     </div>
+<br>
+<br>
+<br>
+                    <div id="goto0">text 1</div>
+                    <div v-for="item in inventory" :key="item.key" class="list-item">
+                        <Card4
+                            v-if="item.avaliable && showCard == 4"
+                            @click.native="showModal"
+                            :name="item.name"
+                            :price="item.price"
+                            :details="item.details"
+                            ></Card4>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div id="goto1">text 2</div>
 
-                    <div id="goto1">text 1</div>
+
+                <div v-for="item in inventory" :key="item.key" class="list-item">
+                    <Card4
+                        v-if="item.avaliable && showCard == 4"
+                        @click.native="showModal"
+                        :name="item.name"
+                        :price="item.price"
+                        :details="item.details"
+                        ></Card4>
+                </div>
+                <br>
+                <br>
+                <br>
+                <div id="goto2">Text 3</div>
+
+
+                <div v-for="item in inventory" :key="item.key" class="list-item">
+                    <Card4
+                        v-if="item.avaliable && showCard == 4"
+                        @click.native="showModal"
+                        :name="item.name"
+                        :price="item.price"
+                        :details="item.details"
+                        ></Card4>
+                </div>
+                <br>
+                <br>
+                <br>
+                <div id="goto3">Text 4</div>
+                <div v-for="item in inventory" :key="item.key" class="list-item">
+                    <Card4
+                        v-if="item.avaliable && showCard == 4"
+                        @click.native="showModal"
+                        :name="item.name"
+                        :price="item.price"
+                        :details="item.details"
+                        ></Card4>
+                </div>
+                <br>
+                <br>
+                <br>
+                <div id="goto4">Text 5</div>
+
+                <div v-for="item in inventory" :key="item.key" class="list-item">
+                    <Card4 
+                        v-if="item .avaliable && showCard == 4"
+                        @click.native="showModal"
+                        :name="item.name"
+                        :price ="item.price"
+                        :details="item.details"
+                        ></Card4>
+                </div>
+                <br>
+                <br>
+                <br>
+                <div id="goto5">Text 6</div>
+               
+                </div>
                 </div>
             </div>
+            <Modal
+                v-if="showingModal"
+                v-on:close="closeModal"
+                :name="inventory[selectedID].name"
+                :price="inventory[0].price + 'k'"
+                :details="inventory[0].description"
+            >Details</Modal>
+            <br />
+        </div>
 
             <!-- </transition> -->
 
@@ -149,15 +236,7 @@
           </div>
         </div>
             </div>-->
-            <Modal
-                v-if="showingModal"
-                v-on:close="closeModal"
-                :name="inventory[selectedID].name"
-                :price="inventory[0].price + 'k'"
-                :details="inventory[0].description"
-            >Details</Modal>
-            <br />
-        </div>
+            
 
         <!-- <div class="temp-holder"> -->
         <!-- <button @click="showCard1"> Card 1 </button>
@@ -167,7 +246,7 @@
 
         <!-- final  -->
         <!-- </div> -->
-    </div>
+
 </template>
 
 <script>
@@ -176,6 +255,7 @@ import Modal from "@/components/Modal.vue";
 // import Card2 from "@/components/Card2.vue";
 // import Card3 from "@/components/Card3.vue";
 import Card4 from "@/components/Card4.vue";
+import SpecialDay from "@/components/SpecialDay.vue";
 import store from "@/store/index.js";
 
 export default {
@@ -185,7 +265,8 @@ export default {
         // Card1,
         // Card2,
         // Card3,
-        Card4
+        Card4,
+        SpecialDay,
     },
     data() {
         return {
@@ -200,6 +281,41 @@ export default {
         inventory() {
             console.log("getting inventory for Grid.vue");
             return store.state.Inventory;
+        },
+        getSection_0(){
+            return store.state.Inventory.filter( (item)=>{
+                    return item.section == 0;
+                });
+        },
+        getSection_1(){
+            return store.state.Inventory.filter( (item)=>{
+                return item.section == 1;
+            });
+        },
+        getSection_2(){
+            return store.state.Inventory.filter( (item)=>{
+                return item.section == 2;
+            });
+        },
+        getSection_3(){
+            return store.state.Inventory.filter( (item)=>{
+                return item.section == 3;
+            });
+        },
+        getSection_4(){
+            return store.state.inventory.filter( (item)=>{
+                return item.section == 4;
+            });
+        },
+        getSection_5(){
+            return store.state.Inventory.filter( (item)=>{
+                return item.section == 4;
+            });
+        },
+        getSection_6(){
+            return store.state.Inventory.filter( (item)=>{
+                return item.section == 5;
+            });
         }
     },
     props: {
@@ -246,7 +362,7 @@ export default {
     display: flex;
     flex-direction: row;
     width: 100%;
-    background-color: turquoise;
+    // background-color: turquoise;
     justify-content: center;
 }
 
@@ -257,124 +373,104 @@ export default {
     width: 100vw;
 }
 
+.menu-box-bottom{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 20vw;
+    height: 90vh;
+}
+
+.menu-box{
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 17vw;
+    height: 90vh;
+    background-color: whitesmoke;
+    border-radius: 50px 50px 50px 50px;
+}
+
+.menu-box-enter,
+.menu-box-leave-to{
+    transform: translate(-17vw, 0px);
+    opacity: 0;
+    position: fixed;
+}
+
+.menu-box-enter-to,
+.menu-box-leave{
+    transform: translate(0px);
+    opacity: 100;
+    position: fixed;
+}
+
+.menu-box-enter-active,
+.menu-box-leave-active{
+    transition: all 1s ease-out;
+}
+
+.menu-box-bottom-enter,
+.menu-box-bottom-leave-to{
+    width: 0px;
+    opacity: 0;
+}
+
+.menu-box-bottom-enter-to,
+.menu-box-bottom-leave{
+    width: 20vw;
+    opacity: 100;
+}
+
+.menu-box-bottom-enter-active,
+.menu-box-bottom-leave-active{
+    transition: all 1s ease-out;
+}
+
 
 .container {
     display: flex;
     flex-direction: row;
-    background-color: whitesmoke;
-
+    // background-color: whitesmoke;
+    // flex-shrink: 1;
     //   height: 100vh;
     //   overflow: scroll;
     border-radius: 50px 50px 50px 50px;
 }
 
+.body {
+    display: flex;
+    flex-direction: row;
+    // justify-content: space-between;
+    // background-color: yellowgreen;
+    width: 100%;
+    min-width: 0px;
+}
+
 .list-container {
     display: flex;
     flex-direction: row;
-
+    min-width: 0px;
     flex-wrap: wrap;
     width: 100%;
     margin: 0px auto;
     overflow: visible;
-    background-color: yellow;
+    // background-color: yellow;
     padding: 30px;
     justify-content: space-between;
 }
 
 .list-item {
-    // display: flex;
-    flex: 0 0 30%;
+    display: flex;
+    min-width: 0px;
+    flex: 0 10 30%;
     // margin: 5px;
-    background-color: purple;
+    // background-color: purple;
 
     justify-content: space-around;
     overflow: hidden;
 }
-// .card4 {
-//     display: flex;
-//     width: 400px;
-
-//     // flex-direction: column;
-//     justify-content: space-around;
-//     // width: 50%;
-//     background-color: green;
-// }
-
-.menu-box {
-    // display: fixed;
-    width: 6000px;
-    will-change: width;
-    background-color: green;
-}
-.menu-box-enter,
-.menu-box-leave-to {
-    width: 0px;
-    background-color: blue;
-}
-
-.menu-box-enter-to,
-.menu-box-leave {
-    width: 100vw;
-    background-color: yellow;
-}
-.menu-box-enter-active,
-.menu-box-leave-active {
-    transition: all 3s ease-out;
-}
-
-
-
-.body {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    // background-color: yellowgreen;
-}
-// .title {
-//   background-color: white;
-//   width: 30px;
-//   height: 10px;
-//   transition: all 3s;
-// }
-// .title:hover {
-//   width: 200px;
-//   height: 500px;
-//   background-color:yellowgreen;
-// }
-
-.box {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
-.red-box {
-    width: 150px;
-    height: 150px;
-    transition: all 5s;
-}
-.green-box {
-    transition: all 5s;
-    width: 150px;
-    height: 150px;
-}
-.blue-box {
-    transition: all 5s;
-    width: 150px;
-    height: 150px;
-}
-.white {
-    background-color: white;
-}
-.red {
-    background-color: red;
-}
-.green {
-    background-color: green;
-}
-.blue {
-    background-color: blue;
-}
-
 #menu-content {
     display: none;
     position: absolute;
@@ -383,24 +479,16 @@ export default {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
-#menu-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-#menu-content a:hover {
+#menu-content a:hover{
     background-color: #f1f1f1;
 }
-.title:hover #menu-content {
+.title:hover #menu-content{
     display: block;
 }
-.title:hover #menu {
+.title:hover #menu{
     background-color: #3e8e41;
 }
-
-
-.menu-button {
+.menu-button{
     position: fixed;
     top: 2vh;
     left: 2vh;
@@ -408,19 +496,13 @@ export default {
     width: 160px;
     height: 50px;
 }
+.day{
+    position: fixed;
+    right: 2vh;
+    top: 2vh;
+}
 
-small {
-    display: block;
-}
-// #button {
-//     position: absolute;
-//     top: 50px;
-//     left: 175px;
-//     // left: 40px;
-//     width: 75px;
-//     height: 75px;
-// }
-.section {
-    font-size: 20px;
-}
+
+
+
 </style>
