@@ -77,7 +77,7 @@
                 v-on:input="updatePrice($event, item.index)"
               /> -->
               <!-- {{item.price.toFixed(2)}} -->
-
+             
 
 
               
