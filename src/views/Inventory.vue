@@ -2,16 +2,15 @@
   <div class="inventory-container">
     <h1>Inventory</h1>
    <div> 
+       <!-- :locale='en' -->
+       <!-- :currency-code='USD' -->
      <money-format :value="price"
-     :locale='en'
-     :currency-code='USD'
      :subunits-value=true 
      :hide-subunits=false>
      </money-format>
    </div>
 
-
-    <div class="top-container">
+    <div v-if="inventory != null" class="top-container">
       <div class="table-header">
         <div class="cell">Avaliable</div>
         <div class="cell">Name</div>
@@ -21,40 +20,12 @@
       </div>
       <div class="table-body-container">
         <div class="table" >
-          <div v-for="item in inventory" :key="item.key" class="table-row" >
-            <div class="cell">
-              <input
-                type="checkbox"
-                id="checkbox"
-                v-model="item.avaliable"
-                v-on:input="updateAvailable($event, item.index)"
-              />
-            </div>
-            <div class="cell">
-              
-              <input
-                type="String"
-                v-model="item.name"
-                v-on:input="updateName($event, item.index)"
-              />
-            </div>
-            <div class="cell">
-                <input
-                type="String"
-                v-model="price"
-                v-on:input="updatePrice($event, item.index)"
-              />
-            </div>
-            <div class="cell scroll">
-              <input
-                type="String"
-                v-model="item.description"
-                v-on:input="updateDescription($event, item.index)"
-              />
-            </div>
+          <div v-for="item in inventory" :key="item.key">
+               <!-- class="table-row" > -->
 
-            <!-- to do  -->
-            <div class="cell">{{ item.image }}</div>
+            <EditInventoryRow v-show="true" :menu-item="item" @click.native="toggleShowEdit(item.key)"> </EditInventoryRow>
+            <!-- <div v-show="!item.showEdit" @click="toggleShowEdit(item.key)"> Whooooohooooo </div>  -->
+          
           </div>
         </div>
       </div>
@@ -68,7 +39,8 @@
 <script>
 import store from "@/store/index.js";
 import MoneyFormat from 'vue-money-format'
-// import InventoryCard from './InventoryCard.vue'
+// import InventoryCard from './../components/InventoryCard.vue'
+import EditInventoryRow from './../components/EditInventoryRow.vue'
 
 export default {
   name: "Inventory",
@@ -78,6 +50,11 @@ export default {
   components: {
     'money-format': MoneyFormat,
     // InventoryCard,
+    EditInventoryRow
+  },
+  mounted () {
+      console.log("mounting")
+    this.inventory = this.vuexInventory;   
   },
   computed: {
     // section: {
@@ -114,13 +91,13 @@ export default {
     //     return this.$store.state.Inventory[this.pickedIndex].image;
     //   },
     // },
-    inventory: {
+    vuexInventory: {
       get() {
         console.log("updateing.........................................");
         return this.$store.state.Inventory.map((value, index) => {
           // value.price = value.price.toFixed(2); 
           // console.log(typeof(value.price))
-          return { ...value, index: index };
+          return { ...value, index: index, showEdit: false };
         });
         //this.$forceUpdate();
       },
@@ -133,6 +110,7 @@ export default {
 
   data() {
     return {
+        inventory: null, 
       //   localInventory: null
       // pickedIndex: 10,
       price: 234.56,
@@ -157,6 +135,10 @@ export default {
   },
      
   methods: {
+      toggleShowEdit(index) {
+          console.log("toggling: " + index); 
+          this.inventory[index].showEdit = true
+      },
     updateAvailable(event, index) {
       console.log("setting Available... " + event.target.checked);
 
