@@ -48,10 +48,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .day-container {
+    position: absolute;
+    right: 0%;
     font-size: 25px;
 }
 
 .green {
+    // position: absolute;
     fill: green;
     transform: rotate(25deg);
 }

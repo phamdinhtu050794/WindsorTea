@@ -1,17 +1,18 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div> -->
-    <!-- HELLO <br>
-    <md-icon> thumb_up</md-icon>
-    <md-icon> close</md-icon>
-    <md-button> hello </md-button> -->
+    
     <router-view/>
   </div>
 </template>
+<script>
 
+
+export default {
+  name: 'App',
+
+  
+}
+</script>
 <style src="vue-material/dist/vue-material.css"></style> 
 <style lang="scss">
 html {
@@ -25,6 +26,10 @@ html {
   text-align: center;
   color: #2c3e50;
 }
+body{
+  padding: 0px;
+  margin: 0px;
+}
 
 #nav {
   padding: 30px;
@@ -37,5 +42,7 @@ html {
       color: #42b983;
     }
   }
+
+  
 }
 </style>

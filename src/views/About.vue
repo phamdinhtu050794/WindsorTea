@@ -10,7 +10,7 @@
 <script>
 // @ is an alias to /src
 
-import Inventory from '@/components/Inventory.vue'
+import Inventory from './Inventory.vue'
 
 export default {
   name: 'About',

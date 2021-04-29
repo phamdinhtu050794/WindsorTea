@@ -1,27 +1,5 @@
 <template>
   <div class="inventory-container">
-    <!-- <input type="String" v-model="name" @input="updateName" />
-
-    <input type="number" :value="section" @input="updateSection">
-    <select @input="updateSection">
-      <option :selected="0 == section">0</option>
-      <option :selected="1 == section">1</option>
-      <option :selected="2 == section">2</option>
-      <option :selected="3 == section">3</option>
-      <option :selected="4 == section">4</option>
-      <option :selected="5 == section">5</option>
-    </select>
-
-    <input type="boolean" v-model="avaliable" @input="updateAvaliable" />
-    <input type="number" v-model="price" @input="updatePrice" />
-    <input type="String" v-model="description" @input="updateDescription" />
-    <input type="String" v-model="image" @input="updateImage" />
-
-    <br />
-    For what index?
-    <br />
-    <input type="number" v-model="pickedIndex" /> -->
-
     <h1>Inventory</h1>
    <div> 
      <money-format :value="price"
@@ -42,16 +20,8 @@
         <div class="cell">Image</div>
       </div>
       <div class="table-body-container">
-        <div class="table">
-          <div v-for="item in inventory" :key="item.key" class="table-row">
-            <!-- <div class="cell"> {{item.chekbox}}</div> -->
-            <!-- <div class="cell">
-              <input
-                type="checkbox"
-                id="checkbox"
-                v-model="inventory[index].avaliable"
-              />
-            </div> -->
+        <div class="table" >
+          <div v-for="item in inventory" :key="item.key" class="table-row" >
             <div class="cell">
               <input
                 type="checkbox"
@@ -60,7 +30,6 @@
                 v-on:input="updateAvailable($event, item.index)"
               />
             </div>
-            <!-- <label for="checkbox">{{ avaliable}}</label> -->
             <div class="cell">
               
               <input
@@ -70,17 +39,11 @@
               />
             </div>
             <div class="cell">
-              <!-- <money v-model="item.price" v-bind="moneyVND" v-on:input="updatePrice($event, item.index)"></money> -->
-              <!-- <input
-                type="number"
-                v-model="item.price" 
+                <input
+                type="String"
+                v-model="price"
                 v-on:input="updatePrice($event, item.index)"
-              /> -->
-              <!-- {{item.price.toFixed(2)}} -->
-             
-
-
-              
+              />
             </div>
             <div class="cell scroll">
               <input
@@ -98,7 +61,6 @@
     </div>
     <div class="bottom-container">
       <button class="button-back" @click="back">Back</button>
-      <!-- <button class="button-update" @click="update">Update</button> -->
     </div>
   </div>
 </template>
@@ -106,6 +68,7 @@
 <script>
 import store from "@/store/index.js";
 import MoneyFormat from 'vue-money-format'
+import InventoryCard from './InventoryCard.vue'
 
 export default {
   name: "Inventory",
@@ -114,6 +77,7 @@ export default {
   //   },
   components: {
     'money-format': MoneyFormat,
+    InventoryCard,
   },
   computed: {
     // section: {
@@ -187,7 +151,8 @@ export default {
           suffix: ' ',
           precision: 2,
           masked: false
-        }
+        },
+        
     };
   },
      
