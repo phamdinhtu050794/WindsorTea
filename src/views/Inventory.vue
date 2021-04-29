@@ -23,7 +23,10 @@
           <div v-for="item in inventory" :key="item.key">
                <!-- class="table-row" > -->
 
-            <EditInventoryRow v-show="true" :menu-item="item" @click.native="toggleShowEdit(item.key)"> </EditInventoryRow>
+            <EditInventoryRow 
+                :menu-item="item" 
+                @click.native="toggleShowEdit(item.key)"
+                v-on:close="testClose"> </EditInventoryRow>
             <!-- <div v-show="!item.showEdit" @click="toggleShowEdit(item.key)"> Whooooohooooo </div>  -->
           
           </div>
@@ -52,9 +55,37 @@ export default {
     // InventoryCard,
     EditInventoryRow
   },
+
+  data() {
+    return {
+        inventory: null, 
+        editIndex: -1, 
+      //   localInventory: null
+      // pickedIndex: 10,
+      price: 234.56,
+      moneyVND:{
+          decimal: '.',
+          thousands: '.',
+          prefix: '',
+          suffix: ' VND',
+          precision: 2,
+          masked: false
+        },
+      moneyUSD:{
+          decimal: '.',
+          thousands: '.',
+          prefix: '$',
+          suffix: ' ',
+          precision: 2,
+          masked: false
+        },
+        
+    };
+  },
   mounted () {
       console.log("mounting")
-    this.inventory = this.vuexInventory;   
+    this.inventory = this.vuexInventory;  
+    
   },
   computed: {
     // section: {
@@ -108,37 +139,21 @@ export default {
     },
   },
 
-  data() {
-    return {
-        inventory: null, 
-      //   localInventory: null
-      // pickedIndex: 10,
-      price: 234.56,
-      moneyVND:{
-          decimal: '.',
-          thousands: '.',
-          prefix: '',
-          suffix: ' VND',
-          precision: 2,
-          masked: false
-        },
-      moneyUSD:{
-          decimal: '.',
-          thousands: '.',
-          prefix: '$',
-          suffix: ' ',
-          precision: 2,
-          masked: false
-        },
-        
-    };
-  },
      
   methods: {
-      toggleShowEdit(index) {
-          console.log("toggling: " + index); 
-          this.inventory[index].showEdit = true
+      testClose(index) {
+          console.log("Received event to close index: " + index);
+          console.log(this.inventory[index].showEdit)
+          this.inventory[index].showEdit = false; 
+          this.inventory[0].showEdit = false; 
+          console.log(this.inventory[index].showEdit)
       },
+    //   toggleShowEdit(index) {
+    //       console.log("toggling: " + index); 
+    //       if( !this.inventory[index].showEdit){
+    //           this.inventory[index].showEdit = true
+    //       }
+    //   },
     updateAvailable(event, index) {
       console.log("setting Available... " + event.target.checked);
 
